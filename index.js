@@ -660,7 +660,7 @@ function isSecure(req, trustProxy) {
  * @private
  */
 
-function setCookie(res, name, val, secret, options) {
+function setCookie(response, name, val, secret, options) {
   var signed = 's:' + signature.sign(val, secret);
   var data = cookie.serialize(name, signed, options);
 
@@ -669,7 +669,7 @@ function setCookie(res, name, val, secret, options) {
   var prev = res.getHeader('Set-Cookie') || []
   var header = Array.isArray(prev) ? prev.concat(data) : [prev, data];
 
-  res.setHeader('Set-Cookie', header)
+  response.setHeader('Set-Cookie', header)
 }
 
 /**
