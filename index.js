@@ -388,7 +388,7 @@ function session(options) {
       wrapmethods(req.session)
     }
 
-    function rewrapmethods (sess, callback) {
+    function rewrapMethods (sess, callback) {
       return function () {
         if (req.session !== sess) {
           wrapmethods(req.session)
@@ -399,7 +399,7 @@ function session(options) {
     }
 
     // wrap session methods
-    function wrapmethods(sess) {
+    function wrapMethods(sess) {
       var _reload = sess.reload
       var _save = sess.save;
 
@@ -534,7 +534,7 @@ function generateSessionId(sess) {
  * @private
  */
 
-function getcookie(req, name, secrets) {
+function getCookie(req, name, secrets) {
   var header = req.headers.cookie;
   var raw;
   var val;
@@ -628,7 +628,7 @@ function hash(sess) {
  * @private
  */
 
-function issecure(req, trustProxy) {
+function isSecure(req, trustProxy) {
   // socket is https server
   if (req.connection && req.connection.encrypted) {
     return true;
@@ -660,7 +660,7 @@ function issecure(req, trustProxy) {
  * @private
  */
 
-function setcookie(res, name, val, secret, options) {
+function setCookie(res, name, val, secret, options) {
   var signed = 's:' + signature.sign(val, secret);
   var data = cookie.serialize(name, signed, options);
 
@@ -680,7 +680,7 @@ function setcookie(res, name, val, secret, options) {
  * @returns {String|Boolean}
  * @private
  */
-function unsigncookie(val, secrets) {
+function unsignCookie(val, secrets) {
   for (var i = 0; i < secrets.length; i++) {
     var result = signature.unsign(val, secrets[i]);
 
